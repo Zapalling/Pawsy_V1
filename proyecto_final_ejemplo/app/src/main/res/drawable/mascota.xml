@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="110dp"
+    android:height="150dp"
+    android:viewportWidth="110"
+    android:viewportHeight="150">
+    <!-- Fondo lavanda -->
+    <path
+        android:fillColor="#ECEBFF"
+        android:pathData="M0,0h110v150h-110z" />
+    <!-- Almohadilla principal -->
+    <path
+        android:fillColor="#3823A8"
+        android:pathData="M55,82 C40,82 30,98 34,108 C37,116 46,114 55,114 C64,114 73,116 76,108 C80,98 70,82 55,82 Z" />
+    <!-- Dedos -->
+    <path
+        android:fillColor="#3823A8"
+        android:pathData="M22,72 a9,9 0 1,0 18,0 a9,9 0 1,0 -18,0 Z" />
+    <path
+        android:fillColor="#3823A8"
+        android:pathData="M37,56 a9,9 0 1,0 18,0 a9,9 0 1,0 -18,0 Z" />
+    <path
+        android:fillColor="#3823A8"
+        android:pathData="M55,56 a9,9 0 1,0 18,0 a9,9 0 1,0 -18,0 Z" />
+    <path
+        android:fillColor="#3823A8"
+        android:pathData="M70,72 a9,9 0 1,0 18,0 a9,9 0 1,0 -18,0 Z" />
+</vector>
