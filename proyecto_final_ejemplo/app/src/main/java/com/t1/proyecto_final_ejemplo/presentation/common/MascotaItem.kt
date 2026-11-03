@@ -38,9 +38,10 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.t1.proyecto_final_ejemplo.data.local.MascotaEntity
 
 @Composable
-fun MascotaItem(mascota: Mascota, onDetalleClick:() -> Unit){
+fun MascotaItem(mascota: MascotaEntity, onDetalleClick: () -> Unit) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(20.dp),
@@ -48,10 +49,10 @@ fun MascotaItem(mascota: Mascota, onDetalleClick:() -> Unit){
         elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
     ) {
         Row(modifier = Modifier.fillMaxWidth().padding(14.dp)) {
-            Box(modifier = Modifier.width(110.dp).height(150.dp).clip(RoundedCornerShape(12.dp))){
+            Box(modifier = Modifier.width(110.dp).height(150.dp).clip(RoundedCornerShape(12.dp))) {
                 Image(
-                    painter = painterResource(id = mascota.foto),
-                    contentDescription = "",
+                    painter = painterResource(id = mascota.fotoRes),
+                    contentDescription = null,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.fillMaxSize()
                 )
@@ -67,9 +68,13 @@ fun MascotaItem(mascota: Mascota, onDetalleClick:() -> Unit){
                 )
             }
             Spacer(modifier = Modifier.width(12.dp))
-            Column() {
-                Column() {
-                    Row() {
+            Column(modifier = Modifier.weight(1f)) {
+                Column {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
                         Text(
                             text = mascota.especie,
                             fontSize = 11.sp,
@@ -79,10 +84,17 @@ fun MascotaItem(mascota: Mascota, onDetalleClick:() -> Unit){
                                 .background(Color(0xFFFFEAD5), RoundedCornerShape(6.dp))
                                 .padding(horizontal = 8.dp, vertical = 3.dp)
                         )
+                        // Precio en Soles (S/.)
+                        Text(
+                            text = "S/. ${String.format("%.2f", mascota.precio)}",
+                            fontSize = 13.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color(0xFF00796B)
+                        )
                     }
-                    Spacer(modifier = Modifier.width(15.dp))
+                    Spacer(modifier = Modifier.height(8.dp))
 
-                    //Titulo
+                    // Título / Nombre
                     Text(
                         text = mascota.nombre,
                         fontSize = 16.sp,
@@ -90,7 +102,7 @@ fun MascotaItem(mascota: Mascota, onDetalleClick:() -> Unit){
                         fontFamily = FontFamily.Serif,
                         color = Color(0xFF101140)
                     )
-                    // Autor
+                    // Dueño
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         modifier = Modifier.padding(top = 2.dp)
@@ -116,7 +128,7 @@ fun MascotaItem(mascota: Mascota, onDetalleClick:() -> Unit){
                     Spacer(modifier = Modifier.height(8.dp))
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement .SpaceBetween,
+                        horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Surface(
@@ -135,7 +147,7 @@ fun MascotaItem(mascota: Mascota, onDetalleClick:() -> Unit){
                                 )
                                 Spacer(modifier = Modifier.width(4.dp))
                                 Text(
-                                    text = "Vacunas al día",
+                                    text = mascota.estadoVacuna,
                                     color = Color(0xFF004D40),
                                     fontSize = 10.sp,
                                     fontWeight = FontWeight.Bold
@@ -167,7 +179,6 @@ fun MascotaItem(mascota: Mascota, onDetalleClick:() -> Unit){
                     }
                 }
             }
-
         }
     }
 }

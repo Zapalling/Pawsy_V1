@@ -19,7 +19,9 @@ fun AppNavigation(navHostController: NavHostController){
     ){
         composable(BottomNavItem.Inicio.ruta){
             InicioScreen(
-                onDetalleMascota = {id -> navHostController.navigate((BottomNavItem.Detalle.passId(id)))}
+                onDetalleMascota = { id ->
+                    navHostController.navigate(BottomNavItem.Detalle.passId(id))
+                }
             )
         }
         composable(
@@ -29,17 +31,36 @@ fun AppNavigation(navHostController: NavHostController){
                 nullable = true
                 defaultValue = null
             })
-        ){
-            FormularioScreen()
+        ){ backStackEntry ->
+            val id = backStackEntry.arguments?.getString("id")
+            FormularioScreen(
+                mascotaId = id,
+                onSaved = {
+                    navHostController.popBackStack()
+                }
+            )
         }
         composable(BottomNavItem.Buscar.ruta) {
-            BuscarScreen ()
+            BuscarScreen(
+                onDetalleMascota = { id ->
+                    navHostController.navigate(BottomNavItem.Detalle.passId(id))
+                }
+            )
         }
         composable(
             route = BottomNavItem.Detalle.ruta,
             arguments = listOf(navArgument("id"){type = NavType.StringType})
-        ){
-            DetalleScreen()
+        ){ backStackEntry ->
+            val id = backStackEntry.arguments?.getString("id") ?: ""
+            DetalleScreen(
+                mascotaId = id,
+                onEditClick = { editId ->
+                    navHostController.navigate(BottomNavItem.Form.passId(editId))
+                },
+                onDeleteComplete = {
+                    navHostController.popBackStack()
+                }
+            )
         }
     }
 }
